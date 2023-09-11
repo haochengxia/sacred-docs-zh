@@ -1,15 +1,15 @@
-与TensorFlow的集成
+# 14
 
-Sacred提供了与TensorFlow库交互的方式。其目标是提供一个API，允许跟踪有关如何在Sacred中使用TensorFlow的特定信息。收集到的数据存储在experiment.info["tensorflow"]中，可以通过各种观察者访问。
+## 与Tensorflow集成
 
-存储TensorFlow日志（FileWriter）
-要将TensorFlow产生的摘要（由tensorflow.summary.FileWriter创建）的位置存储到由ex参数指定的实验记录中，请使用sacred.stflow.LogFileWriter(ex)装饰器或上下文管理器。每当在装饰器或上下文管理器的范围内检测到新的FileWriter实例化时，日志的路径会被复制到实验记录中，与传递给FileWriter的路径完全相同。
+Sacred提供了与Tensorflow库交互的方法。目标是提供一个API，允许跟踪有关如何在Sacred中使用Tensorflow的某些信息。收集到的数据存储在`experiment.info["tensorflow"]`中，可以由各种观察者访问。
 
-这些位置可以在实验的info["tensorflow"]["logdirs"]下找到。
+### 存储Tensorflow日志（FileWriter）
 
-重要提示：在调用装饰的方法或进入上下文之前，实验必须处于RUNNING状态。
+要将由Tensorflow生成的摘要的位置（由`tensorflow.summary.FileWriter`创建）存储到由ex参数指定的实验记录中，请使用`sacred.stflow.LogFileWriter(ex)`装饰器或上下文管理器。每当在装饰器或上下文管理器的范围内检测到新的FileWriter实例化时，日志的路径都会被复制到实验记录中，与传递给FileWriter的路径完全相同。位置可以在实验的`info["tensorflow"]["logdirs"]`下找到。重要提示：在调用装饰方法或进入上下文之前，实验必须处于RUNNING状态。
 
-示例用法：作为装饰器
+#### 示例用法：作为装饰器
+
 LogFileWriter(ex)作为装饰器可以用于函数或类方法。
 
 ```python
@@ -29,7 +29,8 @@ def run_experiment(_run):
         #_run.info["tensorflow"]["logdirs"] == ["/tmp/1", "./test"]
 ```
 
-示例用法：作为上下文管理器
+####  示例用法：作为上下文管理器
+
 有一个上下文管理器可用于在代码的较小部分中捕获路径。
 
 ```python
